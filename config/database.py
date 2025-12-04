@@ -26,10 +26,7 @@ def init_db(app):
             raise ValueError('MONGODB_URI not found in environment variables')
         
         # Check for common mistakes
-        if '<db_password>' in mongodb_uri or '<password>' in mongodb_uri:
-            raise ValueError('MONGODB_URI contains unreplaced placeholder: <password>')
-        
-        if '<cluster>' in mongodb_uri or '<username>' in mongodb_uri:
+        if '<db_password>' in mongodb_uri or '<username>' in mongodb_uri or '<cluster>' in mongodb_uri:
             raise ValueError('MONGODB_URI contains unreplaced placeholders')
         
         # Validate URI starts with mongodb or mongodb+srv

@@ -22,9 +22,6 @@ def create_app():
     if not mongodb_uri:
         print("[ERROR] MONGODB_URI not found in environment variables")
         print("[INFO] Check Render Dashboard → Environment Variables")
-    elif '<' in mongodb_uri and '>' in mongodb_uri:
-        print("[ERROR] MONGODB_URI contains unreplaced placeholders")
-        print(f"[ERROR] URI: {mongodb_uri}")
     
     # Initialize MongoDB Atlas connection
     try:
