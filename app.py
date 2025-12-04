@@ -71,11 +71,13 @@ def create_app():
     
     return app
 
+# Create app instance for Gunicorn
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
     host = os.getenv('HOST', 'localhost')
     port = int(os.getenv('PORT', 5000))
-    debug = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
+    debug = app.config['ENV'] == 'development'
     
     print(f"\nStarting Flask application...")
     print(f"Environment: {os.getenv('FLASK_ENV', 'development')}")
