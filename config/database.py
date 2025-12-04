@@ -23,13 +23,20 @@ def init_db(app):
         mongodb_uri = MongoDBConfig.MONGODB_URI
         
         if not mongodb_uri:
-            raise ValueError('MONGODB_URI not found in .env file')
+            raise ValueError('MONGODB_URI not found in environment variables')
         
-        if not mongodb_uri.startswith('mongodb+srv://'):
-            raise ValueError('Invalid MONGODB_URI format')
-        
+        # Check for common mistakes
         if '<db_password>' in mongodb_uri or '<password>' in mongodb_uri:
-            raise ValueError('MONGODB_URI contains placeholder')
+            raise ValueError('MONGODB_URI contains unreplaced placeholder: <password>')
+        
+        if '<cluster>' in mongodb_uri or '<username>' in mongodb_uri:
+            raise ValueError('MONGODB_URI contains unreplaced placeholders')
+        
+        # Validate URI starts with mongodb or mongodb+srv
+        if not (mongodb_uri.startswith('mongodb://') or mongodb_uri.startswith('mongodb+srv://')):
+            raise ValueError(f'Invalid MONGODB_URI format. Must start with "mongodb://" or "mongodb+srv://". Got: {mongodb_uri[:50]}...')
+        
+        print(f"[INFO] Connecting to MongoDB: {mongodb_uri[:60]}...")
         
         # Disconnect any existing connections first
         try:

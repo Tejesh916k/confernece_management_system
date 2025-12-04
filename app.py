@@ -21,20 +21,24 @@ def create_app():
     mongodb_uri = os.getenv('MONGODB_URI')
     if not mongodb_uri:
         print("[ERROR] MONGODB_URI not found in environment variables")
-        if app.config['ENV'] == 'production':
-            raise ValueError('MONGODB_URI environment variable is required')
-    elif '<db_password>' in mongodb_uri or '<password>' in mongodb_uri:
-        print("[ERROR] MONGODB_URI contains placeholder")
-        if app.config['ENV'] == 'production':
-            raise ValueError('MONGODB_URI contains unreplaced placeholders')
+        print("[INFO] Check Render Dashboard → Environment Variables")
+    elif '<' in mongodb_uri and '>' in mongodb_uri:
+        print("[ERROR] MONGODB_URI contains unreplaced placeholders")
+        print(f"[ERROR] URI: {mongodb_uri}")
     
     # Initialize MongoDB Atlas connection
     try:
         from config.database import init_db
         init_db(app)
         print("[OK] MongoDB Atlas connected successfully")
+    except ValueError as e:
+        print(f"[ERROR] MongoDB configuration error: {e}")
+        print("[HELP] Verify MONGODB_URI in Render Environment Variables")
+        if app.config['ENV'] == 'production':
+            raise
     except Exception as e:
         print(f"[ERROR] MongoDB connection error: {e}")
+        print("[HELP] Check MongoDB Atlas whitelist and connection string")
         if app.config['ENV'] == 'production':
             raise
     
