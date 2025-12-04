@@ -41,6 +41,13 @@ def create_app():
     # Create upload folder
     upload_folder = os.path.join(os.path.dirname(__file__), 'static', 'uploads')
     os.makedirs(upload_folder, exist_ok=True)
+    
+    # Register blueprints
+    try:
+        from controllers.main_routes import main_bp
+        from controllers.auth_routes import auth_bp
+        from controllers.conference_routes import conference_bp
+        from controllers.feature.upload_routes import upload_bp
         from controllers.feature.session_routes import session_bp
         from controllers.feature.payment_routes import payment_bp
         from controllers.feature.report_routes import report_bp
