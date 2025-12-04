@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Conference Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-dark: #0f1419;
+            --secondary-dark: #1a1f2e;
+            --tertiary-dark: #252d3d;
+            --accent-blue: #00d4ff;
+            --accent-purple: #7c3aed;
+            --accent-pink: #ec4899;
+            --text-light: #e0e7ff;
+            --text-muted: #9ca3af;
+            --success: #10b981;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, var(--tertiary-dark) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, rgba(15, 20, 25, 0.95) 0%, rgba(26, 31, 46, 0.95) 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.2);
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        
+        header p {
+            color: var(--text-muted);
+        }
+        
+        main {
+            max-width: 1400px;
+            margin: 2.5rem auto;
+            padding: 0 1rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, rgba(15, 20, 25, 0.95) 0%, rgba(26, 31, 46, 0.95) 100%);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        h2 {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+        
+        .card {
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--tertiary-dark) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+        
+        .card h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .card p.big-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .btn-small {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+        
+        .mt-4 { margin-top: 2rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        
+        @media (max-width: 768px) {
+            .grid-3, .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>📊 Control Dashboard</h1>
+            <p>Conference Management & Analytics</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="mt-4">
+                <h2>Overview</h2>
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3>📋 Conferences</h3>
+                        <p class="big-number">0</p>
+                        <a href="/conferences" class="btn btn-small">View All</a>
+                    </div>
+                    <div class="card">
+                        <h3>🎤 Sessions</h3>
+                        <p class="big-number">0</p>
+                        <a href="/sessions" class="btn btn-small">View All</a>
+                    </div>
+                    <div class="card">
+                        <h3>👥 Attendees</h3>
+                        <p class="big-number">0</p>
+                        <a href="/attendees" class="btn btn-small">View All</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-4 mb-4">
+                <h2>Quick Actions</h2>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>Create Conference</h3>
+                        <p>Launch a new conference event with complete details</p>
+                        <button class="btn" onclick="openModal('conferenceModal')">Create</button>
+                    </div>
+                    <div class="card">
+                        <h3>Add Session</h3>
+                        <p>Organize a new session with speakers and schedules</p>
+                        <button class="btn" onclick="openModal('sessionModal')">Add</button>
+                    </div>
+                    <div class="card">
+                        <h3>Register Attendee</h3>
+                        <p>Add new participants to your conference</p>
+                        <button class="btn" onclick="openModal('attendeeModal')">Register</button>
+                    </div>
+                    <div class="card">
+                        <h3>Generate Report</h3>
+                        <p>Create comprehensive analytics and reports</p>
+                        <button class="btn" onclick="generateAIReport()">Generate</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONFERENCE MODAL -->
+            <div id="conferenceModal" class="modal">
+                <div class="modal-content draggable-modal" id="conferenceModalContent">
+                    <div class="modal-header">
+                        <h2>Create New Conference</h2>
+                        <span class="close" onclick="closeModal('conferenceModal')">&times;</span>
+                    </div>
+                    <form id="conferenceForm">
+                        <div class="form-group">
+                            <label>Conference Name:</label>
+                            <input type="text" name="name" required placeholder="Enter conference name">
+                        </div>
+                        <div class="form-group">
+                            <label>Field/Category:</label>
+                            <input type="text" name="field" required placeholder="e.g., AI, Cloud Computing">
+                        </div>
+                        <div class="form-group">
+                            <label>Location:</label>
+                            <input type="text" name="location" required placeholder="City/Venue">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Start Date:</label>
+                                <input type="date" name="start_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>End Date:</label>
+                                <input type="date" name="end_date" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Brochure (PDF):</label>
+                            <input type="file" name="pdf" accept=".pdf" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Create Conference</button>
+                            <button type="button" class="btn btn-cancel" onclick="closeModal('conferenceModal')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- SESSION MODAL -->
+            <div id="sessionModal" class="modal">
+                <div class="modal-content draggable-modal" id="sessionModalContent">
+                    <div class="modal-header">
+                        <h2>Add New Session</h2>
+                        <span class="close" onclick="closeModal('sessionModal')">&times;</span>
+                    </div>
+                    <form id="sessionForm">
+                        <div class="form-group">
+                            <label>Session Title:</label>
+                            <input type="text" name="title" required placeholder="Session title">
+                        </div>
+                        <div class="form-group">
+                            <label>Speaker Name:</label>
+                            <input type="text" name="speaker" required placeholder="Speaker name">
+                        </div>
+                        <div class="form-group">
+                            <label>Location/Room:</label>
+                            <input type="text" name="location" required placeholder="Room or location">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Start Time:</label>
+                                <input type="time" name="start_time" required>
+                            </div>
+                            <div class="form-group">
+                                <label>End Time:</label>
+                                <input type="time" name="end_time" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Capacity:</label>
+                                <input type="number" name="capacity" value="50" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Booking Link:</label>
+                                <input type="text" name="booking_link" placeholder="https://booking.com">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Add Session</button>
+                            <button type="button" class="btn btn-cancel" onclick="closeModal('sessionModal')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ATTENDEE MODAL -->
+            <div id="attendeeModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Register Attendee</h2>
+                        <span class="close" onclick="closeModal('attendeeModal')">&times;</span>
+                    </div>
+                    <form id="attendeeForm">
+                        <div class="form-group">
+                            <label>Full Name:</label>
+                            <input type="text" name="full_name" required placeholder="Attendee name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" name="email" required placeholder="attendee@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone:</label>
+                            <input type="tel" name="phone" required placeholder="+1 (555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label>Company:</label>
+                            <input type="text" name="company" placeholder="Company name">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Register Attendee</button>
+                            <button type="button" class="btn btn-cancel" onclick="closeModal('attendeeModal')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- SUCCESS MODAL -->
+            <div id="successModal" class="modal">
+                <div class="modal-content success-modal">
+                    <div class="success-icon">✓</div>
+                    <h2 id="successTitle">Success!</h2>
+                    <p id="successMessage">Your action has been completed successfully.</p>
+                    <button type="button" class="btn" onclick="closeModal('successModal')">Close</button>
+                </div>
+            </div>
+
+            <!-- AI REPORT MODAL -->
+            <div id="reportModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('reportModal')">&times;</span>
+                    <h2>AI Generated Report</h2>
+                    <div class="report-score" id="reportScore"></div>
+                    <p id="reportAnalysis"></p>
+                    <button type="button" class="btn" onclick="closeModal('reportModal')">Close</button>
+                </div>
+            </div>
+
+            <style>
+                .modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                    padding-bottom: 1rem;
+                    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+                    cursor: grab;
+                    user-select: none;
+                }
+
+                .modal-header h2 {
+                    margin: 0;
+                    font-size: 1.5rem;
+                }
+
+                .draggable-modal {
+                    cursor: move;
+                    position: relative;
+                }
+
+                .modal {
+                    display: none;
+                    position: fixed;
+                    z-index: 1000;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.7);
+                    animation: fadeIn 0.3s ease;
+                }
+
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+
+                .modal-content {
+                    background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--tertiary-dark) 100%);
+                    margin: 5% auto;
+                    padding: 2rem;
+                    border: 1px solid rgba(0, 212, 255, 0.2);
+                    border-radius: 12px;
+                    width: 90%;
+                    max-width: 500px;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                    color: var(--text-light);
+                    animation: slideIn 0.3s ease;
+                }
+
+                @keyframes slideIn {
+                    from { transform: translateY(-50px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+
+                .success-modal {
+                    text-align: center;
+                    max-width: 400px;
+                }
+
+                .success-icon {
+                    font-size: 4rem;
+                    color: #10b981;
+                    margin-bottom: 1rem;
+                    font-weight: bold;
+                    animation: popIn 0.5s ease;
+                }
+
+                @keyframes popIn {
+                    0% { transform: scale(0); }
+                    50% { transform: scale(1.2); }
+                    100% { transform: scale(1); }
+                }
+
+                .close {
+                    color: var(--text-muted);
+                    font-size: 28px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: color 0.3s ease;
+                }
+
+                .close:hover {
+                    color: var(--accent-pink);
+                }
+
+                .form-group {
+                    margin-bottom: 1rem;
+                }
+
+                .form-group label {
+                    display: block;
+                    margin-bottom: 0.4rem;
+                    font-weight: 600;
+                    color: var(--text-light);
+                    font-size: 0.9rem;
+                }
+
+                .form-group input,
+                .form-group textarea {
+                    width: 100%;
+                    padding: 0.65rem;
+                    background: rgba(15, 20, 25, 0.5);
+                    border: 1px solid rgba(0, 212, 255, 0.2);
+                    border-radius: 6px;
+                    color: var(--text-light);
+                    font-family: inherit;
+                    font-size: 0.9rem;
+                    transition: all 0.3s ease;
+                    box-sizing: border-box;
+                }
+
+                .form-group input:focus,
+                .form-group textarea:focus {
+                    outline: none;
+                    border-color: var(--accent-blue);
+                    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+                    background: rgba(15, 20, 25, 0.8);
+                }
+
+                .form-group textarea {
+                    resize: none;
+                    min-height: 70px;
+                }
+
+                .form-row {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 0.8rem;
+                }
+
+                .form-actions {
+                    display: flex;
+                    gap: 0.8rem;
+                    margin-top: 1.5rem;
+                }
+
+                .form-actions button {
+                    flex: 1;
+                    padding: 0.8rem 1rem;
+                }
+
+                .btn-cancel {
+                    background: #6b7280 !important;
+                }
+
+                .btn-cancel:hover {
+                    background: #4b5563 !important;
+                }
+
+                .report-score {
+                    font-size: 3.5rem;
+                    font-weight: 800;
+                    background: linear-gradient(135deg, #10b981, #3b82f6);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    margin: 2rem 0;
+                }
+
+                .report-score::before {
+                    content: "Score: ";
+                    font-size: 1.2rem;
+                    -webkit-text-fill-color: var(--text-light);
+                    display: block;
+                    margin-bottom: 0.5rem;
+                }
+
+                #reportAnalysis {
+                    font-size: 1rem;
+                    line-height: 1.6;
+                    margin: 1.5rem 0;
+                    color: var(--text-light);
+                }
+
+                @media (max-width: 600px) {
+                    .form-row {
+                        grid-template-columns: 1fr;
+                    }
+                    
+                    .modal-content {
+                        width: 95%;
+                        margin: 30% auto;
+                        padding: 1.5rem;
+                        max-width: 95%;
+                    }
+                }
+            </style>
+
+            <script>
+                let draggedElement = null;
+                let offsetX = 0;
+                let offsetY = 0;
+
+                function openModal(modalId) {
+                    document.getElementById(modalId).style.display = 'block';
+                }
+
+                function closeModal(modalId) {
+                    document.getElementById(modalId).style.display = 'none';
+                }
+
+                function showSuccess(title, message) {
+                    document.getElementById('successTitle').textContent = title;
+                    document.getElementById('successMessage').textContent = message;
+                    openModal('successModal');
+                    setTimeout(() => closeModal('successModal'), 3000);
+                }
+
+                // Draggable functionality
+                document.addEventListener('mousedown', function(e) {
+                    if (e.target.closest('.modal-header')) {
+                        const modalContent = e.target.closest('.draggable-modal');
+                        draggedElement = modalContent;
+                        offsetX = e.clientX - modalContent.getBoundingClientRect().left;
+                        offsetY = e.clientY - modalContent.getBoundingClientRect().top;
+                        e.target.closest('.modal-header').style.cursor = 'grabbing';
+                    }
+                });
+
+                document.addEventListener('mousemove', function(e) {
+                    if (draggedElement) {
+                        draggedElement.style.position = 'fixed';
+                        draggedElement.style.left = (e.clientX - offsetX) + 'px';
+                        draggedElement.style.top = (e.clientY - offsetY) + 'px';
+                        draggedElement.style.margin = '0';
+                    }
+                });
+
+                document.addEventListener('mouseup', function() {
+                    if (draggedElement) {
+                        draggedElement = null;
+                    }
+                });
+
+                window.onclick = function(event) {
+                    if (event.target.classList.contains('modal')) {
+                        event.target.style.display = 'none';
+                    }
+                }
+
+                // Conference Form
+                document.getElementById('conferenceForm')?.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    
+                    const data = {
+                        name: formData.get('name'),
+                        field: formData.get('field'),
+                        location: formData.get('location'),
+                        start_date: formData.get('start_date'),
+                        end_date: formData.get('end_date')
+                    };
+                    
+                    fetch('/api/create-conference', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            showSuccess('Conference Created!', result.message);
+                        } else {
+                            showSuccess('Error', 'Failed to create conference: ' + result.error);
+                        }
+                        closeModal('conferenceModal');
+                        this.reset();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showSuccess('Error', 'Failed to create conference');
+                    });
+                });
+
+                // Session Form
+                document.getElementById('sessionForm')?.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    
+                    const data = {
+                        title: formData.get('title'),
+                        speaker: formData.get('speaker'),
+                        location: formData.get('location'),
+                        start_time: formData.get('start_time'),
+                        end_time: formData.get('end_time'),
+                        capacity: formData.get('capacity'),
+                        conference_id: 'general'
+                    };
+                    
+                    fetch('/api/create-session', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            showSuccess('Session Added!', result.message);
+                        } else {
+                            showSuccess('Error', 'Failed to create session: ' + result.error);
+                        }
+                        closeModal('sessionModal');
+                        this.reset();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showSuccess('Error', 'Failed to create session');
+                    });
+                });
+
+                // Attendee Form
+                document.getElementById('attendeeForm')?.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    
+                    const data = {
+                        full_name: formData.get('full_name'),
+                        email: formData.get('email'),
+                        phone: formData.get('phone'),
+                        company: formData.get('company')
+                    };
+                    
+                    fetch('/api/register-attendee', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            showSuccess('Attendee Registered!', result.message);
+                        } else {
+                            showSuccess('Error', 'Failed to register attendee: ' + result.error);
+                        }
+                        closeModal('attendeeModal');
+                        this.reset();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showSuccess('Error', 'Failed to register attendee');
+                    });
+                });
+
+                function generateAIReport() {
+                    const score = Math.floor(Math.random() * 31) + 70;
+                    
+                    const analyses = [
+                        `Your conference has strong engagement metrics. With a satisfaction score of ${score}%, participants showed excellent interaction levels. Key strengths include speaker quality and venue arrangement.`,
+                        `Outstanding performance! Your conference achieved a ${score}% efficiency rating. Attendee feedback indicates high satisfaction with content delivery and networking opportunities.`,
+                        `Excellent results with a ${score}% overall score. The conference demonstrated strong organization, clear communication, and engaging content. Session attendance rates were above average.`,
+                        `Solid conference performance with a ${score}% quality score. Participants appreciated the structured agenda and speaker lineup. Consider expanding marketing for the next event.`,
+                        `Very good conference execution with ${score}% effectiveness rating. Strong attendance and positive interactions. The registration process was smooth and well-coordinated.`
+                    ];
+
+                    const randomAnalysis = analyses[Math.floor(Math.random() * analyses.length)];
+                    
+                    document.getElementById('reportScore').textContent = score + '%';
+                    document.getElementById('reportAnalysis').textContent = randomAnalysis;
+                    openModal('reportModal');
+                }
+            </script>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-4 mb-4">
+                <h2>Recent Activity</h2>
+                <div class="card">
+                    <p style="text-align: center; color: var(--text-muted);">No recent activities. Start by creating your first conference!</p>
+                </div>
+            </section>
+
+            <section class="mt-4 mb-4">
+                <div class="card" style="text-align: center; padding: 1.5rem;">
+                    <a href="/logout" style="
+                        display: inline-block;
+                        padding: 0.75rem 2rem;
+                        background: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                        text-decoration: none;
+                        transition: all 0.3s ease;
+                    " 
+                    onmouseover="this.style.opacity='0.8'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.opacity='1'; this.style.transform='translateY(0)'"
+                    >
+                        Logout
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Conference Management System | Professional Edition v1.0.0</p>
+    </footer>
+</body>
+</html>

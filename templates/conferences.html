@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferences - Conference Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>📋 Conferences</h1>
+            <p>Manage all conference events</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="mt-4 mb-4">
+                <div class="flex-between">
+                    <h2>All Conferences</h2>
+                    <button class="btn btn-success" onclick="createNewConference()">+ Create Conference</button>
+                </div>
+            </section>
+
+            <section class="mt-4 mb-4">
+                <div class="conference-card">
+                    <p class="text-muted text-center">No conferences found yet.</p>
+                    <p class="text-muted text-center">
+                        <a href="#" onclick="createNewConference()" class="text-primary">Create your first conference</a>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Sample Conference Card -->
+            <section class="mt-4 mb-4" id="conferencesContainer">
+                <!-- Conferences will be loaded here -->
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Conference Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        function createNewConference() {
+            alert('Create Conference feature - Coming soon');
+        }
+    </script>
+</body>
+</html>

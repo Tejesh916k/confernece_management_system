@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}User Panel{% endblock %}
+{% block content %}
+<h2>User Dashboard</h2>
+<p>Email: {{ email }}</p>
+<h3>Your Submissions</h3>
+<table>
+    <tr><th>Title</th><th>Status</th></tr>
+    {% for paper in papers %}
+        <tr><td>{{ paper.title }}</td><td>{{ paper.status }}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,153 @@
+/* General Styles */
+body {
+    /* Updated background to a lighter, less plain color for vibrancy */
+    background: #f0f4f7; 
+    font-family: 'Poppins', sans-serif; /* Changed font for a modern feel (assuming it's loaded) */
+    color: #333;
+    margin: 0;
+    
+    /* Added subtle background image - replace 'your-background-image.jpg' with your actual image path */
+    background-image: url('some_img.jpg'); 
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-attachment: fixed; /* Makes the image fixed when scrolling */
+    background-blend-mode: overlay; /* Helps the content stand out */
+    background-color: rgba(240, 244, 247, 0.85); /* Slightly reduces image opacity and blends with base color */
+}
+
+header {
+    /* Vibrant Primary Color: Deep Teal/Cyan */
+    background-color: #00bcd4; 
+    color: #ffffff; 
+    padding: 1.5rem 2rem; /* Increased padding */
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
+}
+
+nav {
+    /* Dark Contrast Color: Navy Blue */
+    background: #1a237e; 
+    padding: 0.75rem 2rem; /* Adjusted padding */
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    color: #a7ffeb; /* Light, vibrant accent for links */
+    margin-right: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth hover transition */
+}
+
+nav a:hover {
+    color: #ffffff; /* White on hover */
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 1000px; /* Slightly wider container */
+    margin: 3rem auto; /* Increased margin */
+    background: rgba(255, 255, 255, 0.95); /* Semi-transparent white to see background image */
+    padding: 3rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+    border-radius: 12px; /* Softer rounded corners */
+}
+
+h1 {
+    /* Primary Vibrant Color: Cyan/Teal */
+    color: #070a0b; 
+    border-bottom: 2px solid #ff4081; /* Accent line for headings (Hot Pink) */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+ h2, h3 {
+    /* Primary Vibrant Color: Cyan/Teal */
+    color: #00bcd4; 
+    border-bottom: 2px solid #ff4081; /* Accent line for headings (Hot Pink) */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: bold; /* Bold labels */
+    color: #1a237e; /* Navy color for labels */
+}
+
+input[type="text"], input[type="password"], input[type="file"], input[type="email"] {
+    width: 100%;
+    padding: 0.75rem; /* Larger input fields */
+    border-radius: 8px;
+    border: 1px solid #a7ffeb; /* Light border color */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="file"]:focus, input[type="email"]:focus {
+    border-color: #ff4081; /* Hot Pink focus highlight */
+    outline: none;
+}
+
+input[type="submit"], button {
+    /* Accent Vibrant Color: Hot Pink */
+    background: #ff4081; 
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: background 0.3s ease, transform 0.1s ease;
+}
+
+input[type="submit"]:hover, button:hover {
+    background: #f50057; /* Darker Hot Pink on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background: #ffffff; /* White table background */
+    border-radius: 8px;
+    overflow: hidden; /* For rounded corners to work with borders */
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+}
+
+th {
+    background-color: #00bcd4; /* Vibrant Teal/Cyan header */
+    color: #ffffff;
+    font-weight: bold;
+    border-bottom: 3px solid #1a237e; /* Navy separator */
+}
+
+tr:nth-child(even) {
+    background-color: #e0f7fa; /* Lightest vibrant shade for zebra striping */
+}
+
+td {
+    border-bottom: 1px solid #b2ebf2; /* Light blue border */
+}
+
+.flash-message {
+    /* Error/Alert Color: Bright Orange/Red */
+    color: #c62828; 
+    background: #ffccbc; 
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #ff4081; /* Hot Pink border for emphasis */
+    font-weight: bold;
+}

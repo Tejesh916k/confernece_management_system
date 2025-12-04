@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Payment Panel{% endblock %}
+{% block content %}
+<h2>Conference Payment</h2>
+<form method="POST">
+    <div class="form-group">
+        <label>Amount:</label>
+        <input type="text" name="amount" required>
+    </div>
+    <input type="submit" value="Pay">
+</form>
+<h3>Your Payment History</h3>
+<table>
+    <tr><th>Amount</th><th>Status</th></tr>
+    {% for payment in payments %}
+        <tr><td>{{ payment.amount }}</td><td>{{ payment.status }}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

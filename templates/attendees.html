@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendees - Conference Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>👥 Attendees</h1>
+            <p>Manage conference attendees and registrations</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="mt-4 mb-4">
+                <div class="flex-between">
+                    <h2>All Attendees</h2>
+                    <button class="btn btn-success" onclick="registerNewAttendee()">+ Register Attendee</button>
+                </div>
+            </section>
+
+            <section class="mt-4 mb-4">
+                <div class="conference-card">
+                    <p class="text-muted text-center">No attendees registered yet.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Conference Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        function registerNewAttendee() {
+            alert('Register Attendee feature - Coming soon');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: conference-management
+    env: python
+    region: ohio
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: MONGODB_URI
+        fromDatabase:
+          name: conference-db
+          property: connectionString
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: conference-db
+    engine: mongodb
+    region: ohio
+    plan: free

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Conference Management System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+</head>
+<body>
+    <header>
+        <h1>Conference Management System</h1>
+    </header>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('user.dashboard') }}">User Panel</a>
+        <a href="{{ url_for('admin.admin_dashboard') }}">Admin Panel</a>
+        <a href="{{ url_for('upload.upload_paper') }}">Upload Paper</a>
+        <a href="{{ url_for('review.reviews') }}">Review Panel</a>
+        <a href="{{ url_for('payment.payment') }}">Payment</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('user.logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('user.login') }}">Login</a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conference Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-dark: #0f1419;
+            --secondary-dark: #1a1f2e;
+            --tertiary-dark: #252d3d;
+            --accent-blue: #00d4ff;
+            --accent-purple: #7c3aed;
+            --accent-pink: #ec4899;
+            --text-light: #e0e7ff;
+            --text-muted: #9ca3af;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, var(--tertiary-dark) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, rgba(15, 20, 25, 0.9) 0%, rgba(26, 31, 46, 0.9) 100%);
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-pink)) 1;
+            padding: 3rem 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        main {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, rgba(15, 20, 25, 0.95) 0%, rgba(26, 31, 46, 0.95) 100%);
+            border-top: 1px solid var(--tertiary-dark);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        section {
+            margin: 3rem 0;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            font-weight: 700;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .card {
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--tertiary-dark) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .card:hover::before {
+            left: 100%;
+        }
+        
+        .card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+        
+        .card h2 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 0;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #059669);
+        }
+        
+        .btn-success::before {
+            background: linear-gradient(135deg, #10b981, #0ea5e9);
+        }
+        
+        .btn-small {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+        
+        ul {
+            margin: 1.5rem 0;
+            padding-left: 20px;
+        }
+        
+        ul li {
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        table {
+            width: 100%;
+            margin-top: 1.5rem;
+            border-collapse: collapse;
+            background: var(--tertiary-dark);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        table thead {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+        
+        table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.05);
+            color: var(--text-muted);
+        }
+        
+        table tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+        
+        code {
+            background: var(--primary-dark);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: var(--accent-blue);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .mt-4 { margin-top: 2rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            main {
+                margin: 1.5rem auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎯 Conference Management</h1>
+            <p>Enterprise-Grade Conference Management Platform</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="mt-4 mb-4">
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h2>Welcome to Your Conference Hub</h2>
+                        <p>Manage your conference events efficiently with our comprehensive platform.</p>
+                        <p>Create conferences, add sessions, register attendees, and track all conference activities seamlessly.</p>
+                    </div>
+                    <div class="card">
+                        <h2>System Status</h2>
+                        <p><strong>Status:</strong> <span class="badge">Online</span></p>
+                        <p><strong>Database:</strong> <span class="badge">Connected</span></p>
+                        <p><strong>Version:</strong> <span class="badge">1.0.0 Pro</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation Cards -->
+            <section class="mt-4 mb-4">
+                <h2>Core Features</h2>
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3>📋 Conferences</h3>
+                        <p>Create and manage conference events with advanced scheduling and venue management.</p>
+                        <a href="/conferences" class="btn btn-success btn-small">Manage Conferences</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎤 Sessions</h3>
+                        <p>Organize sessions with speakers, topics, and optimized time slot management.</p>
+                        <a href="/sessions" class="btn btn-success btn-small">Manage Sessions</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>👥 Attendees</h3>
+                        <p>Complete attendee management with registration tracking and participation analytics.</p>
+                        <a href="/attendees" class="btn btn-success btn-small">Manage Attendees</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section class="mt-4 mb-4">
+                <h2>Control Center</h2>
+                <div class="card">
+                    <p>Access your comprehensive management dashboard:</p>
+                    <ul>
+                        <li>Create and manage conference events</li>
+                        <li>Design and schedule sessions</li>
+                        <li>Register and track attendees</li>
+                        <li>Monitor registrations in real-time</li>
+                        <li>Upload research papers and certificates</li>
+                        <li>Generate advanced reports and analytics</li>
+                    </ul>
+                    <a href="/dashboard" class="btn">Access Dashboard</a>
+                </div>
+            </section>
+
+            <!-- API Documentation -->
+            <section class="mt-4 mb-4">
+                <h2>API Endpoints</h2>
+                <div class="card">
+                    <h3>Available Routes</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Endpoint</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>GET /</code></td>
+                                <td>Home page</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /dashboard</code></td>
+                                <td>Management dashboard</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /conferences</code></td>
+                                <td>List all conferences</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /sessions</code></td>
+                                <td>List all sessions</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /attendees</code></td>
+                                <td>List all attendees</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /health</code></td>
+                                <td>Health check</td>
+                            </tr>
+                            <tr>
+                                <td><code>POST /api/upload-paper</code></td>
+                                <td>Upload research paper</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Getting Started -->
+            <section class="mt-4 mb-4">
+                <h2>Quick Start</h2>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>Step 1: Create Conference</h3>
+                        <p>Set up your first conference event with details and venue information.</p>
+                        <a href="/conferences" class="btn btn-small">Get Started</a>
+                    </div>
+                    <div class="card">
+                        <h3>Step 2: Add Sessions</h3>
+                        <p>Create engaging sessions with expert speakers and time slots.</p>
+                        <a href="/sessions" class="btn btn-small">Add Sessions</a>
+                    </div>
+                    <div class="card">
+                        <h3>Step 3: Register Attendees</h3>
+                        <p>Manage attendee registrations and track their participation.</p>
+                        <a href="/attendees" class="btn btn-small">Register Now</a>
+                    </div>
+                    <div class="card">
+                        <h3>Step 4: Monitor & Report</h3>
+                        <p>View real-time statistics and generate comprehensive reports.</p>
+                        <a href="/dashboard" class="btn btn-small">View Dashboard</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Conference Management System. All rights reserved. | <strong>v1.0.0 Professional Edition</strong></p>
+    </footer>
+</body>
+</html>

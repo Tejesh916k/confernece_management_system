@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Review Panel{% endblock %}
+{% block content %}
+<h2>Review Assigned Papers</h2>
+<table>
+    <tr><th>Title</th><th>Abstract</th><th>Decision</th></tr>
+    {% for paper in papers %}
+        <tr>
+            <td>{{ paper.title }}</td>
+            <td>{{ paper.abstract }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('review.review_decision', paper_id=paper.id) }}">
+                    <input type="text" name="comments" placeholder="Comments">
+                    <select name="decision">
+                        <option value="Accept">Accept</option>
+                        <option value="Reject">Reject</option>
+                    </select>
+                    <input type="submit" value="Submit">
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
